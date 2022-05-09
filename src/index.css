@@ -1,3 +1,7 @@
+html, body, #root, .App {
+    height: 100%;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +14,65 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.page {
+    height: 100%;
+}
+
+.frame {
+    width: 80%;
+    margin: 0 auto 0 auto;
+}
+
+.navigation-panel {
+    margin: 60px 0 0 0;
+}
+
+.display-panel {
+    min-height: 280px;
+}
+
+.flex-row {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+.flex-column {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.start-justify {
+    align-self: flex-start;
+}
+
+.end-justify {
+    align-self: flex-end;
+}
+
+.row {
+    border: 2px solid white;
+    border-radius: 100px;
+    margin: 6px;
+}
+
+.option {
+    padding: 4px;
+    color: white;
+}
+
+.option.active {
+    border: 2px solid white;
+    background: white;
+}
+
+.correct-0 {
+    background: linear-gradient(180deg, #f66d68 0%, #ee2d2d 100%);
+}
+
+.correct-0 .row {
+    border: 2px solid #f9a29f;
 }

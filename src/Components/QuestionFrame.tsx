@@ -6,31 +6,43 @@ function QuestionFrame() {
     const [activeIndex, setActiveIndex] = useState(0);
 
     let isFirstQuestion = activeIndex === 0;
-    let previousQuestionMarkup = isFirstQuestion
-        ? null
-        : (
-        <button className="pull-left" onClick={() => setActiveIndex(activeIndex - 1)}>
+    let previousQuestionMarkup = (
+        <button className="start-justify" onClick={() => setActiveIndex(activeIndex - 1)}>
             &lt; Previous Question
         </button>
     );
+    if (isFirstQuestion) {
+        previousQuestionMarkup = (
+        <button className="start-justify" disabled>
+            &lt; Previous Question
+        </button>
+        );
+    }
 
     let isLastQuestion = activeIndex === questionData.length - 1;
-    let nextQuestionMarkup = isLastQuestion
-        ? null
-        : (
-        <button className="pull-right" onClick={() => setActiveIndex(activeIndex + 1)}>
+    let nextQuestionMarkup = (
+        <button className="end-justify" onClick={() => setActiveIndex(activeIndex + 1)}>
             Next Question &gt;
         </button>
     );
+    if (isLastQuestion) {
+        nextQuestionMarkup = (
+        <button className="end-justify" disabled>
+            Next Question &gt;
+        </button>
+        );
+    }
 
     return (
-        <div>
-            <div className="DisplayPanel">
-                <QuestionView question={questionData[activeIndex]} />
-            </div>
-            <div className="NavigationPanel">
-                {previousQuestionMarkup}
-                {nextQuestionMarkup}
+        <div className="page correct-0">
+            <div className="frame">
+                <div className="display-panel flex-column">
+                    <QuestionView question={questionData[activeIndex]} />
+                </div>
+                <div className="navigation-panel flex-row">
+                    {previousQuestionMarkup}
+                    {nextQuestionMarkup}
+                </div>
             </div>
         </div>
     );

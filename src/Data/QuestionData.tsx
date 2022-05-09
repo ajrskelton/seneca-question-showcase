@@ -48,17 +48,17 @@ const data : Question[] = [
                     options: [
                         {
                             id: "O16",
-                            label: "is solid at room temperature",
+                            label: "is solid",
                             isCorrect: false
                         },
                         {
                             id: "O17",
-                            label: "is liquid at room temperature",
+                            label: "is liquid",
                             isCorrect: true
                         },
                         {
                             id: "O18",
-                            label: "is gas at room temperature",
+                            label: "is gas",
                             isCorrect: false
                         }
                     ]
@@ -113,7 +113,7 @@ const data : Question[] = [
                         },
                         {
                             id: "O24",
-                            label: "burns in carbon dioxide",
+                            label: "burns in C02",
                             isCorrect: false
                         },
                         {
