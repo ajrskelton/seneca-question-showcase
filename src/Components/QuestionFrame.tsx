@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import QuestionView from './QuestionView';
 import questionData from '../Data/QuestionData';
 
 function QuestionFrame() {
     const [activeIndex, setActiveIndex] = useState(0);
-
+    
     let isFirstQuestion = activeIndex === 0;
     let previousQuestionMarkup = (
         <button className="start-justify" onClick={() => setActiveIndex(activeIndex - 1)}>

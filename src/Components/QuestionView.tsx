@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Question } from '../Types/Question';
 import AnswerView from './AnswerView';
 

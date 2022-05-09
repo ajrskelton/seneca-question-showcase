@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Answer } from '../Types/Answer';
 import AnswerRowView from './AnswerRowView';
 

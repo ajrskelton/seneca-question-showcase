@@ -59,13 +59,22 @@ code {
     margin: 6px;
 }
 
+.half-width {
+    width: 50%;
+}
+
+.third-width {
+    width: 33%;
+}
+
 .option {
-    padding: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 12px;
     color: white;
 }
 
 .option.active {
-    border: 2px solid white;
     background: white;
 }
 
@@ -75,4 +84,14 @@ code {
 
 .correct-0 .row {
     border: 2px solid #f9a29f;
+}
+
+.correct-0 .option {
+    color: #f9a29f;
+}
+
+.correct-0 .option.active {
+    border-radius: 100px;
+    background: #f9a29f;
+    color: #ee2d2d;
 }
