@@ -8,7 +8,6 @@ export const selectSlice = createSlice({
     reducers: {
         select: (state: any, action) => {
             state.selectedOptions[action.payload.rowId] = action.payload.optionId;
-            console.log(action.payload);
         }
     }
 });

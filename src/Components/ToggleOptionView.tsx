@@ -4,10 +4,10 @@ import { RootState } from '../app/store';
 import { Row } from '../Types/Row';
 import { ToggleOption } from '../Types/ToggleOption';
 
-function ToggleOptionView(props: { row: Row, option: ToggleOption }) {
+function ToggleOptionView(props: { row: Row, option: ToggleOption, isLocked: boolean }) {
 
-    const selectedOptionIds = useSelector((state: RootState) => Object.values(state.select.selectedOptions))
-    const dispatch = useDispatch()
+    const selectedOptionIds = useSelector((state: RootState) => Object.values(state.select.selectedOptions));
+    const dispatch = useDispatch();
 
     const isSelected = (id: string) : boolean => {
         for (let selectedOptionId of selectedOptionIds) {
@@ -33,8 +33,10 @@ function ToggleOptionView(props: { row: Row, option: ToggleOption }) {
         optionId: props.option.id
     }
 
+    let clickHandler = () => dispatch(select(payload));
+
     return (
-        <div className={optionClassName} onClick={() => dispatch(select(payload))}>
+        <div className={optionClassName} onClick={!props.isLocked ? clickHandler : undefined}>
             { props.option.label }
         </div>
     );

@@ -79,19 +79,91 @@ code {
 }
 
 .correct-0 {
-    background: linear-gradient(180deg, #f66d68 0%, #ee2d2d 100%);
+    background: linear-gradient(180deg, #e96763 0%, #d32828 100%);
 }
 
 .correct-0 .row {
-    border: 2px solid #f9a29f;
+    border: 2px solid #fcbebc;
 }
 
 .correct-0 .option {
-    color: #f9a29f;
+    color: #fcbebc;
 }
 
 .correct-0 .option.active {
     border-radius: 100px;
-    background: #f9a29f;
-    color: #ee2d2d;
+    background: #fcbebc;
+    color: #d32828;
+}
+
+.correct-1 {
+    background: linear-gradient(180deg, #db9a5d 0%, #ca6826 100%);
+}
+
+.correct-1 .row {
+    border: 2px solid #f8cea6;
+}
+
+.correct-1 .option {
+    color: #f8cea6;
+}
+
+.correct-1 .option.active {
+    border-radius: 100px;
+    background: #f8cea6;
+    color: #ca6826;
+}
+
+.correct-2 {
+    background: linear-gradient(180deg, #d8d05c 0%, #b1a722 100%);
+}
+
+.correct-2 .row {
+    border: 2px solid #faf5a9;
+}
+
+.correct-2 .option {
+    color: #faf5a9;
+}
+
+.correct-2 .option.active {
+    border-radius: 100px;
+    background: #faf5a9;
+    color: #b1a722;
+}
+
+.correct-3 {
+    background: linear-gradient(180deg, #64d45a 0%, #26c440 100%);
+}
+
+.correct-3 .row {
+    border: 2px solid #acfda5;
+}
+
+.correct-3 .option {
+    color: #acfda5;
+}
+
+.correct-3 .option.active {
+    border-radius: 100px;
+    background: #acfda5;
+    color: #26c440;
+}
+
+.correct-4 {
+    background: linear-gradient(180deg, #5ca8db 0%, #2473bd 100%);
+}
+
+.correct-4 .row {
+    border: 2px solid #97d1f8;
+}
+
+.correct-4 .option {
+    color: #97d1f8;
+}
+
+.correct-4 .option.active {
+    border-radius: 100px;
+    background: #97d1f8;
+    color: #2473bd;
 }
