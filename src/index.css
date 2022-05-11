@@ -25,8 +25,44 @@ code {
     margin: 0 auto 0 auto;
 }
 
+.card {
+    border-radius: 12px;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    padding: 24px;
+    margin: 18px 0 18px 0;
+}
+
+.small-image {
+    height: 170px;
+    width: 170px;
+    float: left;
+}
+
+.large-image {
+    height: 100%;
+    width: 400px;
+    text-align: center;
+}
+
 .navigation-panel {
-    margin: 60px 0 0 0;
+    background-color: #000000;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 8px;
+}
+
+.navigation-panel button {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.navigation-panel button:disabled,
+.navigation-panel button[disabled] {
+    background-color: #737373;
+    color: #959595;
 }
 
 .display-panel {
