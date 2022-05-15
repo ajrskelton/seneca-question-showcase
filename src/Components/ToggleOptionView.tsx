@@ -6,7 +6,7 @@ import { ToggleOption } from '../Types/ToggleOption';
 
 function ToggleOptionView(props: { row: Row, option: ToggleOption, isLocked: boolean }) {
 
-    const selectedOptionIds = useSelector((state: RootState) => Object.values(state.select.selectedOptions));
+    const selectedOptionIds = useSelector((state: RootState) => Object.values(state.select.activeResponses));
     const dispatch = useDispatch();
 
     const isSelected = (id: string) : boolean => {

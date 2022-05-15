@@ -1,11 +1,12 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../app/store';
 import { Question } from '../Types/Question';
+import { checkLocked, countCorrectAnswers } from '../util/helpers';
 import AnswerView from './AnswerView';
 
 function QuestionView(props: { children: React.ReactNode, question: Question, isVisible: boolean }) {
     
-    const selectedOptions: any = useSelector((state: RootState) => state.select.selectedOptions);
+    const activeResponses: any = useSelector((state: RootState) => state.select.activeResponses);
 
     if (!props.isVisible) {
         return null;
@@ -13,35 +14,15 @@ function QuestionView(props: { children: React.ReactNode, question: Question, is
 
     const maxCorrectnessLevel = 4;
 
-    const getCorrectAnswers = (question: Question, selectedOptions: any) => {
-        let correctAnswers = 0;
-        const rowsWithResponses = Object.keys(selectedOptions);
-        for (let answerRow of question.answer.rows) {
-            if (rowsWithResponses.includes(answerRow.id)) {
-                let responseId = selectedOptions[answerRow.id];
-                let isCorrect = answerRow.options.find(x => x.id === responseId)?.isCorrect;
-                if (isCorrect) {
-                    correctAnswers++;
-                }
-            }
-        }
-        return correctAnswers;
-    };
-
-    const checkLocked = (question: Question, selectedOptions: any) => {
-        let totalAnswers = question.answer.rows.length;
-        return (totalAnswers === getCorrectAnswers(question, selectedOptions));
-    };
-
-    const getCardClass = (question: Question, selectedOptions: any) => {
-        let totalAnswers = question.answer.rows.length;
-        let correctAnswers = getCorrectAnswers(question, selectedOptions);
-        let correctnessLevel = Math.round(correctAnswers / totalAnswers * maxCorrectnessLevel);
+    const getCardClass = (question: Question, activeResponses: any) => {
+        let totalAnswersCount = question.answer.rows.length;
+        let correctAnswersCount = countCorrectAnswers(question, activeResponses);
+        let correctnessLevel = Math.round(correctAnswersCount / totalAnswersCount * maxCorrectnessLevel);
         return `card correct-${correctnessLevel}`;
     };
     
-    let isLocked = checkLocked(props.question, selectedOptions);
-    let cardClass = getCardClass(props.question, selectedOptions);
+    let isLocked = checkLocked(props.question, activeResponses);
+    let cardClass = getCardClass(props.question, activeResponses);
     let infoCard = (
         <div className='card'>
             { props.children }

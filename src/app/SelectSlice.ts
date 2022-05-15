@@ -3,15 +3,18 @@ import { createSlice } from '@reduxjs/toolkit'
 export const selectSlice = createSlice({
     name: 'select',
     initialState: {
-        selectedOptions: {}
+        activeResponses: {}
     },
     reducers: {
         select: (state: any, action) => {
-            state.selectedOptions[action.payload.rowId] = action.payload.optionId;
+            state.activeResponses[action.payload.rowId] = action.payload.optionId;
+        },
+        selectAll: (state: any, action) => {
+            state.activeResponses = action.payload;
         }
     }
 });
 
-export const { select } = selectSlice.actions
+export const { select, selectAll } = selectSlice.actions
 
 export default selectSlice.reducer

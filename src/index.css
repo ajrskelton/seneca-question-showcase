@@ -108,10 +108,16 @@ code {
     cursor: pointer;
     padding: 12px;
     color: white;
+    -webkit-transition: background-color 250ms linear;
+    -ms-transition: background-color 250ms linear;
+    transition: background-color 250ms linear;
 }
 
 .option.active {
     background: white;
+    -webkit-transition: background-color 250ms linear;
+    -ms-transition: background-color 250ms linear;
+    transition: background-color 250ms linear;
 }
 
 .correct-0 {
@@ -202,4 +208,11 @@ code {
     border-radius: 100px;
     background: #97d1f8;
     color: #2473bd;
+}
+
+.test {
+    transform: translate(0px);
+    -webkit-transition: transform 250ms linear;
+    -ms-transition: transform 250ms linear;
+    transition: transform 250ms linear;
 }
