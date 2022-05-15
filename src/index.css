@@ -52,6 +52,7 @@ code {
     left: 0;
     width: 100%;
     padding: 8px;
+    z-index: 300;
 }
 
 .navigation-panel button {
@@ -111,10 +112,10 @@ code {
     -webkit-transition: background-color 250ms linear;
     -ms-transition: background-color 250ms linear;
     transition: background-color 250ms linear;
+    z-index: 200;
 }
 
 .option.active {
-    background: white;
     -webkit-transition: background-color 250ms linear;
     -ms-transition: background-color 250ms linear;
     transition: background-color 250ms linear;
@@ -134,7 +135,6 @@ code {
 
 .correct-0 .option.active {
     border-radius: 100px;
-    background: #fcbebc;
     color: #d32828;
 }
 
@@ -152,7 +152,6 @@ code {
 
 .correct-1 .option.active {
     border-radius: 100px;
-    background: #f8cea6;
     color: #ca6826;
 }
 
@@ -170,7 +169,6 @@ code {
 
 .correct-2 .option.active {
     border-radius: 100px;
-    background: #faf5a9;
     color: #b1a722;
 }
 
@@ -188,7 +186,6 @@ code {
 
 .correct-3 .option.active {
     border-radius: 100px;
-    background: #acfda5;
     color: #26c440;
 }
 
@@ -206,11 +203,17 @@ code {
 
 .correct-4 .option.active {
     border-radius: 100px;
-    background: #97d1f8;
     color: #2473bd;
 }
 
 .test {
+    transform: translate(0px);
+    -webkit-transition: transform 250ms linear;
+    -ms-transition: transform 250ms linear;
+    transition: transform 250ms linear;
+}
+
+.highlight {
     transform: translate(0px);
     -webkit-transition: transform 250ms linear;
     -ms-transition: transform 250ms linear;
