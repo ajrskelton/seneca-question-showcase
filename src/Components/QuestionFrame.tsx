@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { prev, next } from '../app/QuestionSlice';
 import { selectAll } from '../app/SelectSlice';
-import QuestionView from './QuestionView';
-import questionData from '../Data/QuestionData';
 import { RootState } from '../app/store';
 import { useEffect, useState } from 'react';
 import { Question } from '../Types/Question';
-import { shuffle } from '../util/helpers';
 import { Row } from '../Types/Row';
+import { shuffle } from '../util/helpers';
+import QuestionView from './QuestionView';
+import questionData from '../Data/QuestionData';
 
 function QuestionFrame() {
     const [randomQuestions, setRandomQuestions] = useState<Array<Question>>(questionData);
@@ -47,10 +47,9 @@ function QuestionFrame() {
             }
         }
         dispatch(selectAll(randomResponses));
-
-        console.log();
     }, []);
     
+    // Disable the "Previous Question" button for the first question
     let isFirstQuestion = activeIndex === 0;
     let previousQuestionMarkup = (
         <button className="start-justify" onClick={() => dispatch(prev())}>
@@ -65,6 +64,7 @@ function QuestionFrame() {
         );
     }
 
+    // Disable the "Next Question" button for the last question
     let isLastQuestion = activeIndex === questionData.length - 1;
     let nextQuestionMarkup = (
         <button className="end-justify" onClick={() => dispatch(next())}>
@@ -79,6 +79,7 @@ function QuestionFrame() {
         );
     }
     
+    // The content displayed for a correct question is embedded in that QuestionView's children
     return (
         <div className="frame">
             <div className="display-panel flex-column">

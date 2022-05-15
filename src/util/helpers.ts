@@ -1,11 +1,11 @@
 import { Question } from "../Types/Question";
 
-const countCorrectAnswers = (question: Question, selectedOptions: any) => {
+const countCorrectAnswers = (question: Question, activeResponses: any) => {
     let correctAnswersCount = 0;
-    const rowsWithResponses = Object.keys(selectedOptions);
+    const rowsWithResponses = Object.keys(activeResponses);
     for (let answerRow of question.answer.rows) {
         if (rowsWithResponses.includes(answerRow.id)) {
-            let responseId = selectedOptions[answerRow.id];
+            let responseId = activeResponses[answerRow.id];
             let isCorrect = answerRow.options.find(x => x.id === responseId)?.isCorrect;
             if (isCorrect) {
                 correctAnswersCount++;

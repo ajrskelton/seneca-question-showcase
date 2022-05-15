@@ -14,6 +14,7 @@ function QuestionView(props: { children: React.ReactNode, question: Question, is
 
     const maxCorrectnessLevel = 4;
 
+    // This CSS class determines the colours
     const getCardClass = (question: Question, activeResponses: any) => {
         let totalAnswersCount = question.answer.rows.length;
         let correctAnswersCount = countCorrectAnswers(question, activeResponses);

@@ -26,10 +26,15 @@ code {
 }
 
 .card {
+    color: black;
     border-radius: 12px;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
     padding: 24px;
     margin: 18px 0 18px 0;
+}
+
+.card h2 {
+    color: white;
 }
 
 .small-image {
@@ -109,16 +114,7 @@ code {
     cursor: pointer;
     padding: 12px;
     color: white;
-    -webkit-transition: background-color 250ms linear;
-    -ms-transition: background-color 250ms linear;
-    transition: background-color 250ms linear;
     z-index: 200;
-}
-
-.option.active {
-    -webkit-transition: background-color 250ms linear;
-    -ms-transition: background-color 250ms linear;
-    transition: background-color 250ms linear;
 }
 
 .correct-0 {
@@ -206,16 +202,16 @@ code {
     color: #2473bd;
 }
 
-.test {
-    transform: translate(0px);
+.highlight {
     -webkit-transition: transform 250ms linear;
     -ms-transition: transform 250ms linear;
     transition: transform 250ms linear;
 }
 
-.highlight {
-    transform: translate(0px);
-    -webkit-transition: transform 250ms linear;
-    -ms-transition: transform 250ms linear;
-    transition: transform 250ms linear;
+/*
+@media screen and (max-width: 480px) {
+    .row.flex-row {
+        flex-direction: column;
+    }
 }
+*/

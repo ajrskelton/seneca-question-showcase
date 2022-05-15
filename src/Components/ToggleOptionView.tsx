@@ -3,15 +3,16 @@ import { select } from '../app/SelectSlice';
 import { RootState } from '../app/store';
 import { Row } from '../Types/Row';
 import { ToggleOption } from '../Types/ToggleOption';
+import * as CSS from 'csstype';
 
-function ToggleOptionView(props: { row: Row, option: ToggleOption, isLocked: boolean }) {
+function ToggleOptionView(props: { row: Row, option: ToggleOption, widthRatio: number, isLocked: boolean }) {
 
-    const selectedOptionIds = useSelector((state: RootState) => Object.values(state.select.activeResponses));
+    const activeResponsesIds = useSelector((state: RootState) => Object.values(state.select.activeResponses));
     const dispatch = useDispatch();
 
     const isSelected = (id: string) : boolean => {
-        for (let selectedOptionId of selectedOptionIds) {
-            if (selectedOptionId === id) {
+        for (let activeResponseId of activeResponsesIds) {
+            if (activeResponseId === id) {
                 return true;
             }
         }
@@ -19,14 +20,12 @@ function ToggleOptionView(props: { row: Row, option: ToggleOption, isLocked: boo
     }
 
     let optionClassName = "option";
-    if (props.row.options.length === 3) {
-        optionClassName += " third-width";
-    } else {
-        optionClassName += " half-width";
-    }
     if (isSelected(props.option.id)) {
         optionClassName += " active";
     }
+    let optionCss: CSS.Properties = {
+        width: `${props.widthRatio*100}%`
+    };
 
     let payload = {
         rowId: props.row.id,
@@ -35,8 +34,9 @@ function ToggleOptionView(props: { row: Row, option: ToggleOption, isLocked: boo
 
     let clickHandler = () => dispatch(select(payload));
 
+    // Clicking options does nothing if the question is locked (all active responses are correct)
     return (
-        <div className={optionClassName} onClick={!props.isLocked ? clickHandler : undefined}>
+        <div className={optionClassName} style={optionCss} onClick={!props.isLocked ? clickHandler : undefined}>
             { props.option.label }
         </div>
     );
