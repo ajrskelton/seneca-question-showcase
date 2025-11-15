@@ -19,20 +19,17 @@ function ToggleOptionView(props: { row: Row, option: ToggleOption, widthRatio: n
         return false;
     }
 
-    let optionClassName = "option";
-    if (isSelected(props.option.id)) {
-        optionClassName += " active";
-    }
-    let optionCss: CSS.Properties = {
+    const optionClassName = isSelected(props.option.id) ? "option active" : "option";
+    const optionCss: CSS.Properties = {
         width: `${props.widthRatio*100}%`
     };
 
-    let payload = {
+    const payload = {
         rowId: props.row.id,
         optionId: props.option.id
     }
 
-    let clickHandler = () => dispatch(select(payload));
+    const clickHandler = () => dispatch(select(payload));
 
     // Clicking options does nothing if the question is locked (all active responses are correct)
     return (

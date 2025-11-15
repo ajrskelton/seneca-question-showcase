@@ -16,9 +16,9 @@ function QuestionFrame() {
 
     useEffect(() => {
         // Randomise order of rows and options
-        let randomisedData : Array<Question> = [];
+        const randomisedData : Array<Question> = [];
         for (let q of questionData) {
-            let questionStore: Question = {
+            const questionStore: Question = {
                 id: q.id,
                 questionText: q.questionText,
                 answer: {
@@ -27,7 +27,7 @@ function QuestionFrame() {
                 }
             };
             for (let r of q.answer.rows) {
-                let rowStore: Row = {
+                const rowStore: Row = {
                     id: r.id,
                     options: shuffle(r.options)
                 };
@@ -39,41 +39,41 @@ function QuestionFrame() {
         setRandomQuestions(randomisedData);
 
         // Randomise initial responses
-        let randomResponses: any = {};
+        const randomResponses: any = {};
         for (let q of questionData) {
             for (let r of q.answer.rows) {
-                let randomIndex = Math.floor(Math.random() * r.options.length);
+                const randomIndex = Math.floor(Math.random() * r.options.length);
                 randomResponses[r.id] = r.options[randomIndex].id;
             }
         }
         dispatch(selectAll(randomResponses));
-    }, []);
+    }, [dispatch]);
     
     // Disable the "Previous Question" button for the first question
-    let isFirstQuestion = activeIndex === 0;
+    const isFirstQuestion = activeIndex === 0;
     let previousQuestionMarkup = (
-        <button className="start-justify" onClick={() => dispatch(prev())}>
+        <button data-testid="previous-question-button" className="start-justify" onClick={() => dispatch(prev())}>
             &lt; Previous Question
         </button>
     );
     if (isFirstQuestion) {
         previousQuestionMarkup = (
-        <button className="start-justify" disabled>
+        <button data-testid="previous-question-button" className="start-justify" disabled>
             &lt; Previous Question
         </button>
         );
     }
 
     // Disable the "Next Question" button for the last question
-    let isLastQuestion = activeIndex === questionData.length - 1;
+    const isLastQuestion = activeIndex === questionData.length - 1;
     let nextQuestionMarkup = (
-        <button className="end-justify" onClick={() => dispatch(next())}>
+        <button data-testid="next-question-button" className="end-justify" onClick={() => dispatch(next())}>
             Next Question &gt;
         </button>
     );
     if (isLastQuestion) {
         nextQuestionMarkup = (
-        <button className="end-justify" disabled>
+        <button data-testid="next-question-button" className="end-justify" disabled>
             Next Question &gt;
         </button>
         );

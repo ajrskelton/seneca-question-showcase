@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import { Row } from '../Types/Row';
 import { useSelector } from 'react-redux';
 import { RootState } from '../app/store';
@@ -15,10 +15,7 @@ function AnswerRowView(props: { row: Row, isLocked: boolean }) {
     */
 
     const activeResponses: any = useSelector((state: RootState) => state.select.activeResponses);
-    const [windowSize, setWindowSize] = useState({
-        width: 0,
-        height: 0,
-    });
+    const rowRef = useRef<HTMLDivElement | null>(null);
     const [rect, setRect] = useState({
         top: 0,
         right: 0,
@@ -28,51 +25,69 @@ function AnswerRowView(props: { row: Row, isLocked: boolean }) {
         width: 0
     });
     
-    // This use effect sets the width and height of the window on resize
-    // While these values don't get used, the change triggers the measuredRef callback below
-    useEffect(() => {
-        const handleResize = () => {
-            setWindowSize({
-                width: window.innerWidth,
-                height: window.innerHeight,
-            });
-        };
-        window.addEventListener(`resize-${props.row.id}`, handleResize);
-        handleResize();
-        return () => window.removeEventListener(`resize-${props.row.id}`, handleResize);
-    }, [windowSize, props.row.id]);
-
-    // The rect below hold the value of the bounding rectangle of this row
-    const measuredRef = useCallback((node: any) => {
-        if (node !== null) {
-            let clientRect = node.getBoundingClientRect()
-            setRect({
-                top: Math.round(clientRect.top),
-                right: Math.round(clientRect.right),
-                bottom: Math.round(clientRect.bottom),
-                left: Math.round(clientRect.left),
-                width: Math.round(clientRect.width),
-                height: Math.round(clientRect.height)
+    // Function to measure and update the rect
+    const measureRect = useCallback(() => {
+        if (rowRef.current !== null) {
+            // Use requestAnimationFrame to ensure DOM is fully laid out
+            requestAnimationFrame(() => {
+                if (rowRef.current !== null) {
+                    const clientRect = rowRef.current.getBoundingClientRect();
+                    setRect({
+                        top: Math.round(clientRect.top),
+                        right: Math.round(clientRect.right),
+                        bottom: Math.round(clientRect.bottom),
+                        left: Math.round(clientRect.left),
+                        width: Math.round(clientRect.width),
+                        height: Math.round(clientRect.height)
+                    });
+                }
             });
         }
-    }, [windowSize]);
+    }, []);
 
-    let widthRatio = 0;
-    if (props.row.options.length === 3) {
-        widthRatio = 0.33333;
-    } else {
-        widthRatio = 0.50;
-    }
+    // The rect below hold the value of the bounding rectangle of this row
+    const measuredRef = useCallback((node: HTMLDivElement | null) => {
+        rowRef.current = node;
+        if (node !== null) {
+            // Use double requestAnimationFrame to ensure layout is complete on initial mount
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    measureRect();
+                });
+            });
+        }
+    }, [measureRect]);
+
+    // Recalculate rect on window resize
+    useEffect(() => {
+        const handleResize = () => {
+            measureRect();
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [measureRect]);
+
+    // Recalculate rect after initial mount to ensure correct measurements
+    useEffect(() => {
+        // Use double requestAnimationFrame to ensure layout is complete
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                measureRect();
+            });
+        });
+    }, [measureRect]);
+
+    const widthRatio = props.row.options.length === 3 ? 0.33333 : 0.50;
 
     // This index is used to determine how far the highlight should be offset to the right
     let index = 0;
     for (let i = 0; i < props.row.options.length; i++) {
-        let option = props.row.options[i];
+        const option = props.row.options[i];
         if (option.id === activeResponses[props.row.id]) {
             index = i;
         }
     }
-    let highlightCss: CSS.Properties = {
+    const highlightCss: CSS.Properties = {
         position: 'absolute',
         top: `${rect.top}px`,
         left: `${rect.left}px`,

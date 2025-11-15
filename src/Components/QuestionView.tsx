@@ -16,15 +16,15 @@ function QuestionView(props: { children: React.ReactNode, question: Question, is
 
     // This CSS class determines the colours
     const getCardClass = (question: Question, activeResponses: any) => {
-        let totalAnswersCount = question.answer.rows.length;
-        let correctAnswersCount = countCorrectAnswers(question, activeResponses);
-        let correctnessLevel = Math.round(correctAnswersCount / totalAnswersCount * maxCorrectnessLevel);
+        const totalAnswersCount = question.answer.rows.length;
+        const correctAnswersCount = countCorrectAnswers(question, activeResponses);
+        const correctnessLevel = Math.round(correctAnswersCount / totalAnswersCount * maxCorrectnessLevel);
         return `card correct-${correctnessLevel}`;
     };
     
-    let isLocked = checkLocked(props.question, activeResponses);
-    let cardClass = getCardClass(props.question, activeResponses);
-    let infoCard = (
+    const isLocked = checkLocked(props.question, activeResponses);
+    const cardClass = getCardClass(props.question, activeResponses);
+    const infoCard = (
         <div className='card'>
             { props.children }
         </div>
